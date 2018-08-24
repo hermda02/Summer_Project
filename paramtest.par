@@ -1,10 +1,6 @@
-beam = 28.2
 clfile = YES
 decouple = YES
-mapfile = pol_test_map_beam.fits
+mapfile  = ./fits/simulatedmap_512_w_10.0_noise.fits
+mapfile2 =  ./fits/simulatedmap_512_w_2.5_noise.fits
 nlmax = 700
 polarization = YES
-apodizetype = 1
-apodizesigma = 17.000000
-thetamax = 17.000000
-maskfile = mask_latlon_512.fits

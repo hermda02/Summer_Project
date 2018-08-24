@@ -5,9 +5,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import healpy as hp
 
-polspicetest = np.loadtxt('./data/polspicetest_mask.txt')
-planck = np.loadtxt("./data/COM_PowerSpect_CMB-base-plikHM-TT-lowTEB-minimum-theory_R2.02.txt")
-fsky = hp.read_map('./fits/mask_latlon_512.fits')
+polspicetest = np.loadtxt('polspicetest_mask.txt')
+planck = np.loadtxt("COM_PowerSpect_CMB-base-plikHM-TT-lowTEB-minimum-theory_R2.02.txt")
+fsky = hp.read_map('mask_latlon_512.fits')
 
 ls = np.array(planck[:,0])
 TT = np.array(planck[:,1])
@@ -62,61 +62,57 @@ frac = yes / (no + yes)
 
 for i in range(int(lmax/25)):
 	binl[i]   = 12 + i*25
-	binTT[i]  = np.sum(TT[i*25:24+i*25])/24
-	binsTT[i] = np.sum(newTT[i*25:24+i*25])/24
+	binTT[i]  = np.sum(TT[i*25:24+i*25])/25
+	binsTT[i] = np.sum(newTT[i*25:24+i*25])/25
 	declTT[i] = np.sqrt(2/((2*binl[i]+1)*frac))*binsTT[i]
 
 for i in range(int(lmax/25)):
-	binEE[i]  = np.sum(EE[i*25:24+i*25])/24
-	binsEE[i] = np.sum(newEE[i*25:24+i*25])/24
+	binEE[i]  = np.sum(EE[i*25:24+i*25])/25
+	binsEE[i] = np.sum(newEE[i*25:24+i*25])/25
 	declEE[i] = np.sqrt(2/((2*binl[i]+1)*frac))*binsEE[i]
 
 for i in range(int(lmax/25)):
-	binBB[i]  = np.sum(BB[i*25:24+i*25])/24
-	binsBB[i] = np.sum(newBB[i*25:24+i*25])/24
+	binBB[i]  = np.sum(BB[i*25:24+i*25])/25
+	binsBB[i] = np.sum(newBB[i*25:24+i*25])/25
 	declBB[i] = np.sqrt(2/((2*binl[i]+1)*frac))*binsBB[i]
 
 for i in range(int(lmax/25)):
-	binTE[i]  = np.sum(TE[i*25:24+i*25])/24
-	binsTE[i] = np.sum(newTE[i*25:24+i*25])/24
+	binTE[i]  = np.sum(TE[i*25:24+i*25])/25
+	binsTE[i] = np.sum(newTE[i*25:24+i*25])/25
 	declTE[i] = np.sqrt(2/((2*binl[i]+1)*frac))*binsTE[i]
 
-plt.errorbar(binl,binsTT,yerr=declTT,color='grey',label='Binned PolSpice w/ error')
-plt.plot(binl,binTT,label='Binned Planck Power')
-plt.plot(ls,newTT,label='PolSpice Power')
+plt.errorbar(binl,binsTT,yerr=declTT,color='grey')
+plt.plot(binl,binTT)
 plt.xlim(0,lmax)
 plt.xlabel(r'$l$')
 plt.ylabel(r'$l(l+1)C_l/2\pi$')
-plt.title('TT Power Spectrum')
+plt.title('PolSpice TT Power Spectrum with error')
 plt.legend(loc='best')
 plt.show()
 
-plt.errorbar(binl,binsEE,yerr=declEE,color='grey',label='Binned PolSpice w/ error')
-plt.plot(binl,binEE,label='Binned Planck Power')
-plt.plot(ls,newEE,label='PolSpice Power')
+plt.errorbar(binl,binsEE,yerr=declEE,color='grey')
+plt.plot(binl,binEE)
 plt.xlim(0,lmax)
 plt.xlabel(r'$l$')
 plt.ylabel(r'$l(l+1)C_l/2\pi$')
-plt.title('EE Power Spectrum')
+plt.title('PolSpice EE Power Spectrum with error')
 plt.legend(loc='best')
 plt.show()
 
-plt.errorbar(binl,binsBB,yerr=declBB,color='grey',label='Binned PolSpice w/ error')
-plt.plot(binl,binBB,label='Binned Planck Power')
-plt.plot(ls,newBB,label='PolSpice Power')
+plt.errorbar(binl,binsBB,yerr=declBB,color='grey')
+plt.plot(binl,binBB)
 plt.xlim(0,lmax)
 plt.xlabel(r'$l$')
 plt.ylabel(r'$l(l+1)C_l/2\pi$')
-plt.title('BB Power Spectrum')
+plt.title('PolSpice BB Power Spectrum with error')
 plt.legend(loc='best')
 plt.show()
 
-plt.errorbar(binl,binsTE,yerr=declTE,color='grey',label='Binned PolSpice w/ error')
-plt.plot(binl,binTE,label='Binned Planck Power')
-plt.plot(ls,newTE,label='PolSpice Power')
+plt.errorbar(binl,binsTE,yerr=declTE,color='grey')
+plt.plot(binl,binTE)
 plt.xlim(0,lmax)
 plt.xlabel(r'$l$')
 plt.ylabel(r'$l(l+1)C_l/2\pi$')
-plt.title('TE Power Spectrum')
+plt.title('PolSpice TE Power Spectrum with error')
 plt.legend(loc='best')
 plt.show()

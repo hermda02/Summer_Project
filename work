@@ -1,0 +1,52 @@
+Summer Research Outline (Began: 25/6/2018)                                                      |
+------------------------------------------------------------------------------------------------|
+
+-----------------------|
+Tasks                  |
+-----------------------|
+Install Healpy       X |
+Install HEALPix      X | - Got HEALPix install and have verified with AST5220 code.
+Install PolSpice     X | - Successfully able to reproduce Planck TT C_l's.
+                       |
+synfast(Cls,Nside)   X | - Initial issue, but solved with a healpy re-install after (uses astropy
+anafast(maps.fits)   X |   packages).
+write_map(.fits)     X |
+                       | - Polspice works well, have played with different parameters. Issues with
+mask	             X |   BB output
+bin Cls              X | 
+error bars           X | - Magnitude of C_l error bars are directly proportional to the C_l value!
+	                   |   This effect seems a bit of a strong effect, especially when masked! The
+	                   |   error bars indicate a small certainty of the validity of the analysis  
+	                   |   which otherwise looks great. --WHY??--
+	                   |
+add noise            X | - Answer to the above question: I'm an idiot! I was using an incorrect 
+r and lensing fit    X |   expression for the error (l/(2l+1) instead of 2/(2l+1)). Problem solved.
+                       |
+                       |
+-----------------------|
+-----------------------|
+
+-------------------------------------------------------------------------
+Research Procedure:
+
+- import c_ls (planck or simulation)
+- synfast(cls(pols),Nside)
+- add noise to pixels
+- write map
+- run polspice (runspice -optinfile paramtest.par)
+- look at C_ls of polspice map
+- bin C_ls and 
+- minimize templates for best fit
+
+Simulated data with noise lensing fits:
+----------------------------------------
+Noise:            Chisq:		lensing:		r:
+0				  0.002363      2.423816        2.108934
+2.5               1.984811		37.84988		0.621990
+5.0               9.483434      142.3584        0.0
+10.0              34.30961      559.5528        0.0
+
+Spider with foregrounds lensing fits:
+----------------------------------------
+Chisq:		Lensing:		r:
+1.266465	0.0				29.89102

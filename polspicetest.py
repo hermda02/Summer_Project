@@ -7,8 +7,8 @@ from scipy.stats import chisquare
 
 mpl.rcParams['text.usetex'] = True
 
-polspicetest = np.loadtxt('polspicetest_mask.txt')
-planck = np.loadtxt("COM_PowerSpect_CMB-base-plikHM-TT-lowTEB-minimum-theory_R2.02.txt")
+polspicetest = np.loadtxt('spice.cl')
+planck = np.loadtxt("./data/COM_PowerSpect_CMB-base-plikHM-TTTEEE-lowl-lowE-lensing-minimum-theory_R3.01.txt")
 
 ls = np.array(planck[:,0])
 TT = np.array(planck[:,1])
@@ -24,7 +24,7 @@ newTE = polspicetest[2:,4]
 
 lmax = max(newls)
 
-print('lmax = ', lmax)
+print 'lmax = ', lmax
 
 ls    = ls[:int(lmax)-1]
 TT    = TT[:int(lmax)-1]
@@ -43,7 +43,7 @@ chiEE = chisquare(newEE,EE)
 chiBB = chisquare(newBB,BB)
 chiTE = chisquare(newTE,TE)
 
-print('TT Chi square results:', chiTT)
+print 'TT Chi square results:', chiTT
 
 plt.plot(ls,TT,label='Planck TT')
 plt.plot(newls,newTT, label='PolSpice TT')
@@ -54,7 +54,7 @@ plt.title('TT Power Spectrum')
 plt.legend(loc='best')
 plt.show()
 
-print('EE Chi square results:', chiEE)
+print 'EE Chi square results:', chiEE
 
 plt.plot(ls,EE,label='Planck EE')
 plt.plot(newls,newEE, label='PolSpice EE')
@@ -65,7 +65,7 @@ plt.title('EE Power Spectrum')
 plt.legend(loc='best')
 plt.show()
 
-print('BB Chi square results:', chiBB)
+print 'BB Chi square results:', chiBB
 
 plt.plot(ls,BB,label='Planck BB')
 plt.plot(newls,newBB, label='PolSpice BB')
@@ -76,7 +76,7 @@ plt.title('BB Power Spectrum')
 plt.legend(loc='best')
 plt.show()
 
-print('TE Chi square results:', chiTE)
+print 'TE Chi square results:', chiTE
 
 plt.plot(ls,TE,label='Planck TE')
 plt.plot(newls,newTE, label='PolSpice TE')
